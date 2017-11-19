@@ -8,14 +8,24 @@
 
 import UIKit
 
-class MovieCell: UICollectionViewCell {
-    
+class BaseCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
     }
     
-    var movieSetting: Movie? {
+    func setupViews() {
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+class MovieCell: BaseCell {
+
+    var movieSetting: Movies? {
         didSet {
             posterImageView.image = movieSetting?.poster
             titleLabel.text = movieSetting?.title
@@ -59,7 +69,9 @@ class MovieCell: UICollectionViewCell {
         return separator
     }()
     
-    func setupViews() {
+    override func setupViews() {
+        super.setupViews()
+        
         addSubview(posterImageView)
         addSubview(titleLabel)
         addSubview(yearLabel)
@@ -77,8 +89,6 @@ class MovieCell: UICollectionViewCell {
         
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    
     
 }

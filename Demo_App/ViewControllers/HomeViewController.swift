@@ -9,7 +9,16 @@
 import UIKit
 
 class HomeViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, MovieDelegate {
-
+    
+    var movies: [Movies] = {
+       var addMovie = Movies()
+        addMovie.title = "DeadPool"
+        addMovie.poster = UIImage(named: "deadpool_movie")
+        addMovie.year = "2016"
+        addMovie.type = "Actor, Funny"
+        addMovie.info = "So Funny"
+        return [addMovie]
+    }()
     var movieArray: Array<Movie> = []
     let menuBar: MenuBar = {
         let mb = MenuBar()
@@ -24,7 +33,8 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
         navigationController?.navigationBar.isTranslucent = false
         collectionView?.backgroundColor = UIColor.rpb(red: 38, green: 50, blue: 56)
         collectionView?.register(MovieCell.self, forCellWithReuseIdentifier: "cellId")
-        
+        collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
+        collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
         setupMenuBar()
     }
     
@@ -36,7 +46,7 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
     private func setupMenuBar() {
         view.addSubview(menuBar)
         view.addContrainsWithFormat("H:|[v0]|", view: menuBar)
-        view.addContrainsWithFormat("V:[v0(50)]-0-|", view: menuBar)
+        view.addContrainsWithFormat("V:[v0(50)]", view: menuBar)
     }
     
     func sendMovie(movieData: Movie!) {
@@ -57,13 +67,13 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.movieArray.count
+        return movies.count//self.movieArray.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! MovieCell
         cell.backgroundColor = UIColor.rpb(red: 38, green: 50, blue: 56)
-        let movieData = self.movieArray[indexPath.row]
+        let movieData = movies[indexPath.row]
         cell.movieSetting = movieData
         return cell
     }
@@ -85,7 +95,3 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
     }
     
 }
-
-
-
-

@@ -1,3 +1,4 @@
+
 //
 //  AppDelegate.swift
 //  Demo_App
@@ -28,12 +29,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UINavigationBar.appearance().barTintColor = UIColor.rpb(red: 38, green: 50, blue: 56)
         
-//        let swicthBarMovie = UIView()
-//        swicthBarMovie.backgroundColor = UIColor.rpb(red: 60, green: 200, blue: 56)
-//        
-//        window?.addSubview(swicthBarMovie)
-//        window?.addContrainsWithFormat("H:|[v0]|", view: swicthBarMovie)
-//        window?.addContrainsWithFormat("V:|[v0(10)]|", view: swicthBarMovie)
+        application.statusBarStyle = .lightContent
+        
+        let statusBarBackroundView = UIView()
+        statusBarBackroundView.backgroundColor = UIColor.rpb(red: 50, green: 50, blue: 56)
+        
+        window?.addSubview(statusBarBackroundView)
+        window?.addContrainsWithFormat("H:|[v0]|", view: statusBarBackroundView)
+        window?.addContrainsWithFormat("V:|[v0(20)]", view: statusBarBackroundView)
         
         return true
     }

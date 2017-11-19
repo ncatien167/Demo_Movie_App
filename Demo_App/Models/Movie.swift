@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Movie {
+class Movie: NSObject {
     
     var poster: UIImage!
     var title: String!
@@ -23,6 +23,16 @@ class Movie {
         self.type = type
         self.info = info
     }
+    
+}
+
+class Movies: NSObject {
+    
+    var poster: UIImage?
+    var title: String?
+    var year: String?
+    var type: String?
+    var info: String?
     
 }
 

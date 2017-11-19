@@ -97,68 +97,6 @@
             endingLineNumber = "48"
             landmarkName = "posterImageView"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Demo_App.MovieCell.init(frame: __C.CGRect) -&gt; Demo_App.MovieCell"
-                  moduleName = "Demo_App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ssdfdsf/Downloads/Demo_App/Demo_App/ViewController.swift"
-                  timestampString = "532535649.761164"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "48"
-                  endingLineNumber = "48"
-                  offsetFromSymbolStart = "91">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; __ObjC.UIImageView in variable initialization expression of Demo_App.MovieCell.posterImageView : __ObjC.UIImageView"
-                  moduleName = "Demo_App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ssdfdsf/Downloads/Demo_App/Demo_App/ViewController.swift"
-                  timestampString = "532535649.765821"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "49"
-                  endingLineNumber = "49"
-                  offsetFromSymbolStart = "4">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Demo_App.MovieCell.posterImageView.getter : __ObjC.UIImageView"
-                  moduleName = "Demo_App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ssdfdsf/Downloads/Demo_App/Demo_App/ViewController.swift"
-                  timestampString = "532535649.769308"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "48"
-                  endingLineNumber = "48"
-                  offsetFromSymbolStart = "109">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Demo_App.MovieCell.init(coder: __ObjC.NSCoder) -&gt; Swift.Optional&lt;Demo_App.MovieCell&gt;"
-                  moduleName = "Demo_App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ssdfdsf/Downloads/Demo_App/Demo_App/ViewController.swift"
-                  timestampString = "532535649.773363"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "48"
-                  endingLineNumber = "48"
-                  offsetFromSymbolStart = "46">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
