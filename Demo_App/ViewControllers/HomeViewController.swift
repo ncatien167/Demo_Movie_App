@@ -10,6 +10,8 @@ import UIKit
 
 class HomeViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, MovieDelegate {
     
+    let slideMenu = SlideMenu()
+    
     var movies: [Movies] = {
        var addMovie = Movies()
         addMovie.title = "DeadPool"
@@ -19,40 +21,43 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
         addMovie.info = "So Funny"
         return [addMovie]
     }()
+    
     var movieArray: Array<Movie> = []
-    let menuBar: MenuBar = {
+    
+    lazy var menuBar: MenuBar = {
         let mb = MenuBar()
+        mb.homeController = self
         return mb
     }()
     
+    let cellId = "cellId"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        showMenuButton()
         addButton()
         navigationItem.title = "Home"
         navigationController?.navigationBar.isTranslucent = false
-        collectionView?.backgroundColor = UIColor.rpb(red: 38, green: 50, blue: 56)
-        collectionView?.register(MovieCell.self, forCellWithReuseIdentifier: "cellId")
-        collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
-        collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
+        
         setupMenuBar()
+        setupCollectionView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        collectionView?.reloadData()
-    }
-    
-    private func setupMenuBar() {
-        view.addSubview(menuBar)
-        view.addContrainsWithFormat("H:|[v0]|", view: menuBar)
-        view.addContrainsWithFormat("V:[v0(50)]", view: menuBar)
-    }
     
     func sendMovie(movieData: Movie!) {
         movieArray.append(movieData)
     }
     
+    func showMenuButton() {
+        let image = UIImage(named: "nav-menu")
+        let menuButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(menuButtonPressed(_:)))
+        navigationItem.leftBarButtonItem = menuButton
+    }
+    
+    @IBAction func menuButtonPressed(_ sender: Any) {
+        slideMenu.showSlideMenu()
+    }
+
     func addButton() {
         let addButon = UIBarButtonItem(title: "ADD", style: .plain, target: self, action: #selector(addButtonPressed(_:)))
         navigationItem.rightBarButtonItem = addButon
@@ -65,33 +70,93 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
         let nav = UINavigationController.init(rootViewController: addMovieVc)
         self.present(nav, animated: true, completion: nil)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView?.reloadData()
+    }
+    
+    func setupCollectionView() {
+        if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.scrollDirection = .horizontal
+            flowLayout.minimumLineSpacing = 0
+        }
+        
+        collectionView?.backgroundColor = UIColor.rpb(red: 38, green: 50, blue: 56)
+        //collectionView?.register(MovieCell.self, forCellWithReuseIdentifier: "cellId")
+        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
+        collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
+        
+        collectionView?.isPagingEnabled = true
+    }
+    
+    func scrollToMenuIndex(menuIndex: Int) {
+        let indexPath = NSIndexPath(item: menuIndex, section: 0)
+        collectionView?.scrollToItem(at: indexPath as IndexPath, at: .init(rawValue: 0), animated: true)
+    }
+    
+    private func setupMenuBar() {
+        view.addSubview(menuBar)
+        view.addContrainsWithFormat("H:|[v0]|", view: menuBar)
+        view.addContrainsWithFormat("V:[v0(50)]", view: menuBar)
 
+        //menuBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        menuBar.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        menuBar.horizontalBarLeftAnchorConstraint?.constant = scrollView.contentOffset.x / 2
+    }
+    
+    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        print(targetContentOffset.pointee.x / view.frame.width)
+        let index = targetContentOffset.pointee.x / view.frame.width
+        let indexPath = NSIndexPath(item: Int(index), section: 0)
+        menuBar.collectionView.selectItem(at: indexPath as IndexPath, animated: true, scrollPosition: .init(rawValue: 0))
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movies.count//self.movieArray.count
+        return 2
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! MovieCell
-        cell.backgroundColor = UIColor.rpb(red: 38, green: 50, blue: 56)
-        let movieData = movies[indexPath.row]
-        cell.movieSetting = movieData
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let color: [UIColor] = [.red, .white]
+        cell.backgroundColor = color[indexPath.item]
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 200)
+        return CGSize(width: view.frame.width, height: view.frame.height)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let addMovieVc = storyboard.instantiateViewController(withIdentifier: "AddMovieViewController") as! AddMovieViewController
-        addMovieVc.movie = movieArray[indexPath.row]
-        let nav = UINavigationController.init(rootViewController: addMovieVc)
-        self.present(nav, animated: true, completion: nil)
-    }
+
+//    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return movies.count//self.movieArray.count
+//    }
+//
+//    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! MovieCell
+//        cell.backgroundColor = UIColor.rpb(red: 38, green: 50, blue: 56)
+//        let movieData = movies[indexPath.row]
+//        cell.movieSetting = movieData
+//        return cell
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        return CGSize(width: view.frame.width, height: 200)
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        return 0
+//    }
+//
+//    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let addMovieVc = storyboard.instantiateViewController(withIdentifier: "AddMovieViewController") as! AddMovieViewController
+//        addMovieVc.movie = movieArray[indexPath.row]
+//        let nav = UINavigationController.init(rootViewController: addMovieVc)
+//        self.present(nav, animated: true, completion: nil)
+//    }
     
 }

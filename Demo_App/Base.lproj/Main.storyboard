@@ -122,7 +122,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="ADD NEW">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" red="0.88620775938034058" green="0.89414006471633911" blue="0.89791852235794067" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="addNewButtonPressed:" destination="0k7-19-Owy" eventType="touchUpInside" id="38R-EM-8Tx"/>

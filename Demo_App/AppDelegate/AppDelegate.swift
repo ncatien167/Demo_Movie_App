@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         let layout = UICollectionViewFlowLayout()
-        
+        //layout.scrollDirection = .horizontal make this in home view 
         window?.rootViewController = UINavigationController(rootViewController: HomeViewController(collectionViewLayout: layout))
         
         UINavigationBar.appearance().barTintColor = UIColor.rpb(red: 38, green: 50, blue: 56)
@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.statusBarStyle = .lightContent
         
         let statusBarBackroundView = UIView()
-        statusBarBackroundView.backgroundColor = UIColor.rpb(red: 50, green: 50, blue: 56)
+        statusBarBackroundView.backgroundColor = UIColor.rpb(red: 55, green: 71, blue: 79)
         
         window?.addSubview(statusBarBackroundView)
         window?.addContrainsWithFormat("H:|[v0]|", view: statusBarBackroundView)
