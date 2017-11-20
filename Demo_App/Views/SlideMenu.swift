@@ -82,8 +82,6 @@ class SlideMenu: NSObject {
         contentView.addContrainsWithFormat("V:|-64-[v0]|", view: collectionView)
     }
     
-    
-    
     override init() {
         super.init()
         

@@ -12,16 +12,6 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     let slideMenu = SlideMenu()
     
-    var movies: [Movies] = {
-       var addMovie = Movies()
-        addMovie.title = "DeadPool"
-        addMovie.poster = UIImage(named: "deadpool_movie")
-        addMovie.year = "2016"
-        addMovie.type = "Actor, Funny"
-        addMovie.info = "So Funny"
-        return [addMovie]
-    }()
-    
     var movieArray: Array<Movie> = []
     
     lazy var menuBar: MenuBar = {
@@ -31,6 +21,8 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
     }()
     
     let cellId = "cellId"
+    
+    let titles = ["Home", "Collection View"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,7 +76,7 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
         
         collectionView?.backgroundColor = UIColor.rpb(red: 38, green: 50, blue: 56)
         //collectionView?.register(MovieCell.self, forCellWithReuseIdentifier: "cellId")
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
         collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
         collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
         
@@ -114,6 +106,10 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
         let index = targetContentOffset.pointee.x / view.frame.width
         let indexPath = NSIndexPath(item: Int(index), section: 0)
         menuBar.collectionView.selectItem(at: indexPath as IndexPath, animated: true, scrollPosition: .init(rawValue: 0))
+        
+        if let titleLabel = navigationItem.titleView as? UILabel {
+            titleLabel.text = titles[Int(index)]
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -122,41 +118,12 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-        let color: [UIColor] = [.red, .white]
-        cell.backgroundColor = color[indexPath.item]
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: view.frame.height)
     }
-
-//    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return movies.count//self.movieArray.count
-//    }
-//
-//    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! MovieCell
-//        cell.backgroundColor = UIColor.rpb(red: 38, green: 50, blue: 56)
-//        let movieData = movies[indexPath.row]
-//        cell.movieSetting = movieData
-//        return cell
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return CGSize(width: view.frame.width, height: 200)
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 0
-//    }
-//
-//    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let addMovieVc = storyboard.instantiateViewController(withIdentifier: "AddMovieViewController") as! AddMovieViewController
-//        addMovieVc.movie = movieArray[indexPath.row]
-//        let nav = UINavigationController.init(rootViewController: addMovieVc)
-//        self.present(nav, animated: true, completion: nil)
-//    }
     
 }

@@ -24,6 +24,10 @@
 		18E360831FC2BF28003DDFFC /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E360821FC2BF25003DDFFC /* MovieCell.swift */; };
 		18E360851FC2BF39003DDFFC /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E360841FC2BF39003DDFFC /* MenuCell.swift */; };
 		18E360871FC2BFD8003DDFFC /* SlideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E360861FC2BFD8003DDFFC /* SlideMenuCell.swift */; };
+		18E3608A1FC2CA0D003DDFFC /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E360891FC2CA0D003DDFFC /* ApiManager.swift */; };
+		18E3608C1FC2CB66003DDFFC /* ApiEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3608B1FC2CB66003DDFFC /* ApiEndpoint.swift */; };
+		18E3608E1FC2CC2C003DDFFC /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3608D1FC2CC2C003DDFFC /* ApiResponse.swift */; };
+		18E360901FC2D5E9003DDFFC /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3608F1FC2D5E9003DDFFC /* FeedCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +50,10 @@
 		18E360821FC2BF25003DDFFC /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		18E360841FC2BF39003DDFFC /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		18E360861FC2BFD8003DDFFC /* SlideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideMenuCell.swift; sourceTree = "<group>"; };
+		18E360891FC2CA0D003DDFFC /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
+		18E3608B1FC2CB66003DDFFC /* ApiEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiEndpoint.swift; sourceTree = "<group>"; };
+		18E3608D1FC2CC2C003DDFFC /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
+		18E3608F1FC2D5E9003DDFFC /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		A545F6D0608B36F5353D7D51 /* Pods-Demo_App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo_App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Demo_App/Pods-Demo_App.debug.xcconfig"; sourceTree = "<group>"; };
 		F913D75F93E22FA166683BC3 /* Pods-Demo_App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo_App.release.xcconfig"; path = "Pods/Target Support Files/Pods-Demo_App/Pods-Demo_App.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,6 +125,7 @@
 		18694BF01FBD917C00587792 /* Demo_App */ = {
 			isa = PBXGroup;
 			children = (
+				18E360881FC2CA04003DDFFC /* Api */,
 				18B04C5F1FBED7A600FDC9D4 /* Views */,
 				18B04C5E1FBED7A000FDC9D4 /* Helpers */,
 				1833F9BC1FBE9AA3002C35E0 /* Base */,
@@ -156,8 +165,19 @@
 				18E360821FC2BF25003DDFFC /* MovieCell.swift */,
 				18E360841FC2BF39003DDFFC /* MenuCell.swift */,
 				18E360861FC2BFD8003DDFFC /* SlideMenuCell.swift */,
+				18E3608F1FC2D5E9003DDFFC /* FeedCell.swift */,
 			);
 			path = ViewsCell;
+			sourceTree = "<group>";
+		};
+		18E360881FC2CA04003DDFFC /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				18E360891FC2CA0D003DDFFC /* ApiManager.swift */,
+				18E3608B1FC2CB66003DDFFC /* ApiEndpoint.swift */,
+				18E3608D1FC2CC2C003DDFFC /* ApiResponse.swift */,
+			);
+			path = Api;
 			sourceTree = "<group>";
 		};
 		A0E6E1DE7F59ABE8F3F44430 /* Frameworks */ = {
@@ -270,11 +290,19 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Demo_App/Pods-Demo_App-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JGProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -308,17 +336,21 @@
 			files = (
 				1833F9B51FBE78D5002C35E0 /* HomeViewController.swift in Sources */,
 				1833F9B41FBE78CF002C35E0 /* AppDelegate.swift in Sources */,
+				18E360901FC2D5E9003DDFFC /* FeedCell.swift in Sources */,
 				18E360851FC2BF39003DDFFC /* MenuCell.swift in Sources */,
 				1833F9B71FBE78E3002C35E0 /* Movie.swift in Sources */,
 				18E360831FC2BF28003DDFFC /* MovieCell.swift in Sources */,
+				18E3608E1FC2CC2C003DDFFC /* ApiResponse.swift in Sources */,
 				18B04C651FBEDF6800FDC9D4 /* MenuBar.swift in Sources */,
 				1833F9B91FBE7D0A002C35E0 /* AddMovieViewController.swift in Sources */,
 				18E360801FC2911F003DDFFC /* SlideMenu.swift in Sources */,
 				1833F9BB1FBE817E002C35E0 /* DetailMovieViewController.swift in Sources */,
 				18E360871FC2BFD8003DDFFC /* SlideMenuCell.swift in Sources */,
+				18E3608A1FC2CA0D003DDFFC /* ApiManager.swift in Sources */,
 				1833F9BE1FBE9AAC002C35E0 /* BaseViewController.swift in Sources */,
 				18694BFA1FBD917C00587792 /* Demo_App.xcdatamodeld in Sources */,
 				18B04C631FBED87000FDC9D4 /* Extentions.swift in Sources */,
+				18E3608C1FC2CB66003DDFFC /* ApiEndpoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
