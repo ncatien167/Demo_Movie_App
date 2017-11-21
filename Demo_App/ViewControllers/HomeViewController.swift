@@ -8,11 +8,9 @@
 
 import UIKit
 
-class HomeViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, MovieDelegate {
+class HomeViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     let slideMenu = SlideMenu()
-    
-    var movieArray: Array<Movie> = []
     
     lazy var menuBar: MenuBar = {
         let mb = MenuBar()
@@ -21,23 +19,18 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
     }()
     
     let cellId = "cellId"
-    
+    let apiCellId = "apiCellId"
     let titles = ["Home", "Collection View"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        showMenuButton()
-        addButton()
         navigationItem.title = "Home"
         navigationController?.navigationBar.isTranslucent = false
         
+        showMenuButton()
+        addButton()
         setupMenuBar()
         setupCollectionView()
-    }
-    
-    
-    func sendMovie(movieData: Movie!) {
-        movieArray.append(movieData)
     }
     
     func showMenuButton() {
@@ -58,7 +51,6 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
     @IBAction func addButtonPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let addMovieVc = storyboard.instantiateViewController(withIdentifier: "AddMovieViewController") as! AddMovieViewController
-        addMovieVc.delegate = self
         let nav = UINavigationController.init(rootViewController: addMovieVc)
         self.present(nav, animated: true, completion: nil)
     }
@@ -69,23 +61,32 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
     }
     
     func setupCollectionView() {
+        
         if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.scrollDirection = .horizontal
             flowLayout.minimumLineSpacing = 0
         }
         
         collectionView?.backgroundColor = UIColor.rpb(red: 38, green: 50, blue: 56)
-        //collectionView?.register(MovieCell.self, forCellWithReuseIdentifier: "cellId")
-        collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
         collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
         collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
-        
         collectionView?.isPagingEnabled = true
+        
+        collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.register(MovieWithApiCell.self, forCellWithReuseIdentifier: apiCellId)
+        
     }
     
     func scrollToMenuIndex(menuIndex: Int) {
         let indexPath = NSIndexPath(item: menuIndex, section: 0)
         collectionView?.scrollToItem(at: indexPath as IndexPath, at: .init(rawValue: 0), animated: true)
+        
+        setupTitleNavigation(with: menuIndex)
+    }
+    
+    private func setupTitleNavigation(with menuIndex: Int) {
+        let title = titles[menuIndex]
+        navigationItem.title = title
     }
     
     private func setupMenuBar() {
@@ -97,6 +98,10 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
         menuBar.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
     }
     
+}
+
+extension HomeViewController {
+    
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         menuBar.horizontalBarLeftAnchorConstraint?.constant = scrollView.contentOffset.x / 2
     }
@@ -107,9 +112,7 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
         let indexPath = NSIndexPath(item: Int(index), section: 0)
         menuBar.collectionView.selectItem(at: indexPath as IndexPath, animated: true, scrollPosition: .init(rawValue: 0))
         
-        if let titleLabel = navigationItem.titleView as? UILabel {
-            titleLabel.text = titles[Int(index)]
-        }
+        setupTitleNavigation(with: Int(index))
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -117,9 +120,13 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+       
         
-        return cell
+        if indexPath.item == 0 {
+            return collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        } else {
+            return collectionView.dequeueReusableCell(withReuseIdentifier: apiCellId, for: indexPath)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -43,7 +43,7 @@ class SlideMenu: NSObject {
             
             window.addSubview(menuView)
             window.addSubview(contentView)
-
+            
             contentView.backgroundColor = UIColor.rpb(red: 38, green: 50, blue: 56)
             
             let width = (300/375) * window.frame.size.width

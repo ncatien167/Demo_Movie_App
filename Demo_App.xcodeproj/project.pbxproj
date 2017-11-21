@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1486732BC9159AB96AD369C2 /* Pods_Demo_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C5D0CD7573F722B001C302A /* Pods_Demo_App.framework */; };
+		18158D981FC3CBEB00A47F9F /* MovieWithApiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18158D971FC3CBEB00A47F9F /* MovieWithApiCell.swift */; };
 		1833F9B41FBE78CF002C35E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1833F9B01FBE78C0002C35E0 /* AppDelegate.swift */; };
 		1833F9B51FBE78D5002C35E0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1833F9B21FBE78C6002C35E0 /* HomeViewController.swift */; };
 		1833F9B71FBE78E3002C35E0 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1833F9B61FBE78E3002C35E0 /* Movie.swift */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		0C5D0CD7573F722B001C302A /* Pods_Demo_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Demo_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		18158D971FC3CBEB00A47F9F /* MovieWithApiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieWithApiCell.swift; sourceTree = "<group>"; };
 		1833F9B01FBE78C0002C35E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1833F9B21FBE78C6002C35E0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1833F9B61FBE78E3002C35E0 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				18E360841FC2BF39003DDFFC /* MenuCell.swift */,
 				18E360861FC2BFD8003DDFFC /* SlideMenuCell.swift */,
 				18E3608F1FC2D5E9003DDFFC /* FeedCell.swift */,
+				18158D971FC3CBEB00A47F9F /* MovieWithApiCell.swift */,
 			);
 			path = ViewsCell;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				18694BFA1FBD917C00587792 /* Demo_App.xcdatamodeld in Sources */,
 				18B04C631FBED87000FDC9D4 /* Extentions.swift in Sources */,
 				18E3608C1FC2CB66003DDFFC /* ApiEndpoint.swift in Sources */,
+				18158D981FC3CBEB00A47F9F /* MovieWithApiCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

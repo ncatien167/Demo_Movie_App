@@ -59,10 +59,11 @@ class  MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UI
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! MenuCell
         cell.backgroundColor = UIColor.rpb(red: 55, green: 71, blue: 79)
         cell.itemLabel.text = itemLabels[indexPath.row]
-        //cell.itemLabel.textColor = UIColor.rpb(red: 91, green: 14, blue: 13)
+
         return cell
     }
 

@@ -25,13 +25,23 @@ class BaseCell: UICollectionViewCell {
 
 class MovieCell: BaseCell {
 
-    var movieSetting: Movies? {
+    var movieSetting: Movie? {
         didSet {
             posterImageView.image = movieSetting?.poster
             titleLabel.text = movieSetting?.title
             yearLabel.text = movieSetting?.year
             typeLabel.text = movieSetting?.type
             infoLabel.text = movieSetting?.info
+        }
+    }
+    
+    var moviesSetting: Movies? {
+        didSet {
+            posterImageView.image = moviesSetting?.poster
+            titleLabel.text = moviesSetting?.title
+            yearLabel.text = moviesSetting?.year
+            typeLabel.text = moviesSetting?.type
+            infoLabel.text = moviesSetting?.info
         }
     }
     
